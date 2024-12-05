@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Posts" %>
+
+<% if user_signed_in? %>
+  <p>Person: 
+    <%= current_user.email %>
+    <%= link_to "logout", destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+  </p>
+<% else %>
+  <%= link_to "signin", new_user_session_path %>
+<% end %>
+
+<h1>Posts</h1>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <%= render post %>
+  <% end %>
+</div>
+
+<%= link_to "New post", new_post_path %>
